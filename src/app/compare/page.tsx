@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { formatCompensation } from '@/lib/config';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://talent-daash-full-stack-zbnn.vercel.app';
 export default function CompareOffersPage() {
   const [allRecords, setAllRecords] = useState<any[]>([]);
   const [s1, setS1] = useState<string>('');
@@ -10,37 +11,43 @@ export default function CompareOffersPage() {
   const [compData, setCompData] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
-  // Initialize initial options records metrics list
-  useEffect(() => {
-    async function loadOptions() {
+  
+useEffect(() => {
+  async function loadOptions() {
+    try {
+    
       const res = await fetch('/api/salaries?limit=100');
       const payload = await res.json();
       if (payload?.data) setAllRecords(payload.data);
+    } catch (error) {
+      console.error("Error loading options:", error);
     }
-    loadOptions();
-  }, []);
+  }
+  loadOptions();
+}, []);
 
-  // Fetch full comparisons mapping deltas matrix when inputs align
+  
   useEffect(() => {
     if (!s1 || !s2 || s1 === s2) {
       setCompData(null);
       return;
     }
 
-    async function fetchComparisonMetrics() {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/compare?s1=${s1}&s2=${s2}`);
-        if (res.ok) {
-          const payload = await res.json();
-          setCompData(payload);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+  
+async function fetchComparisonMetrics() {
+  setLoading(true);
+  try {
+    const res = await fetch(`/api/compare?s1=${s1}&s2=${s2}`);
+    if (res.ok) {
+      const payload = await res.json();
+      setCompData(payload);
     }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+}
 
     fetchComparisonMetrics();
   }, [s1, s2]);
