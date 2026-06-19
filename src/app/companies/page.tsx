@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { db } from '@/lib/db';
 import { Metadata } from 'next';
 
-//export const dynamic = 'force-dynamic';
+
 
 export const metadata: Metadata = {
   title: 'Tech Companies | TalentDash',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CompaniesListPage() {
-  // Database se saari companies alphabetical order me fetch karo
+  
   const companies = await db.company.findMany({
     orderBy: { name: 'asc' }
   });
