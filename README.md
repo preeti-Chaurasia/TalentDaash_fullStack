@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TalentDash: Compensation Intelligence Engine
 
-## Getting Started
+TalentDash is a high-performance compensation analytics platform designed to provide structured, authenticated salary data for tech professionals.
 
-First, run the development server:
+## 🚀 Live Demo
+[VERCEL_LIVE_URL]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏗 Architecture Overview
+TalentDash is built using **Next.js 15 App Router** with **Server Components** for maximum performance.
+- **Frontend:** Server-side rendered components for SEO and speed.
+- **Backend:** PostgreSQL (Neon) managed via Prisma ORM.
+- **Pipeline:** Automated normalization layer that standardizes company names and validates compensation data before storage.
+- **Performance:** Optimized LCP by leveraging RSC (React Server Components) and database-level indexing.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img width="3000" height="2500" alt="image" src="https://github.com/user-attachments/assets/6c41d48d-8ca9-42b7-a0c1-dbf906fbbca3" />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚡ How to Run Locally
+1. **Clone the repo:** `git clone https://github.com/preeti-Chaurasia/TalentDaash_fullStack.git`
+2. **Install dependencies:** `npm install`
+3. **Setup environment:** Create a `.env` file in the root directory:
+   ```env
+   DATABASE_URL="your_postgresql_connection_string_here"
+Initialize Database:
+npx prisma db push --force-reset
+npx prisma db seed
+Start: npm run dev
 
-## Learn More
+Open http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#Rejected Records & Reasons
+Record: { company: "Unknown", role: "Intern", base: "abc" } → Rejected: Invalid base_salary (NaN).
+Record: { company: "Google", role: "SDE", base: 1000000000 } → Rejected: Compensation Outlier (Validation threshold exceeded).
