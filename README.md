@@ -3,7 +3,7 @@
 TalentDash is a high-performance compensation analytics platform designed to provide structured, authenticated salary data for tech professionals.
 
 ## 🚀 Live Demo
-[VERCEL_LIVE_URL]
+talent-daash-full-stack-zbnn.vercel.app
 
 ## 🏗 Architecture Overview
 TalentDash is built using **Next.js 15 App Router** with **Server Components** for maximum performance.
@@ -29,5 +29,6 @@ Start: npm run dev
 Open http://localhost:3000
 
 #Rejected Records & Reasons
+
 Record: { company: "Unknown", role: "Intern", base: "abc" } → Rejected: Invalid base_salary (NaN).
 Record: { company: "Google", role: "SDE", base: 1000000000 } → Rejected: Compensation Outlier (Validation threshold exceeded).
