@@ -3,10 +3,9 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client"
- 
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
 }
-
 enum Level {
   L3
   L4
